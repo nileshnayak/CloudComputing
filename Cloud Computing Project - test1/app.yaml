@@ -1,0 +1,34 @@
+application: first-nk-try 
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /
+  script: blob_Storage1.app
+  login: required
+  
+- url: /crontask
+  script: crontask.app
+  
+- url: /index\.html
+  script: blob_Storage1.app
+  login: required
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /images
+  static_dir: images
+
+- url: /(.*\.(js))
+  static_files: min.js
+  upload: static/(.*\.(js))
+- url: /admin/.*
+  script: admin.app
+  login: admin
+
+- url: /.*
+  script: blob_Storage1.app
+  login: required
